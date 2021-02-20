@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCity } from "../../redux/actions";
 import "./search-bar.styles.css";
 
 export const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
+  // const state = useSelector((state) => state);
+  // console.log(state);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
@@ -10,7 +15,7 @@ export const SearchBar = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(searchValue);
+    searchValue && dispatch(getCity(searchValue));
     setSearchValue("");
   };
 

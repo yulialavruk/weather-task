@@ -7,7 +7,24 @@ const setCityAction = (payload) => {
   };
 };
 
+const isLoadingAction = (payload) => {
+  return {
+    type: "SET_LOADING",
+    payload,
+  };
+};
+
+const isErrorAction = (payload) => {
+  return {
+    type: "SET_ERROR",
+    payload,
+  };
+};
+
 export const getCity = (searchValue) => (dispatch) => {
+  dispatch(setCityAction(null));
+  dispatch(isLoadingAction(true));
+  dispatch(isErrorAction(false));
   axios
     .get("https://community-open-weather-map.p.rapidapi.com/weather", {
       params: {
@@ -21,8 +38,10 @@ export const getCity = (searchValue) => (dispatch) => {
     })
     .then(({ data }) => {
       dispatch(setCityAction(data));
+      dispatch(isLoadingAction(false));
     })
-    .catch(() => {
-      console.log("error");
+    .catch((error) => {
+      dispatch(isLoadingAction(false));
+      dispatch(isErrorAction(true));
     });
 };

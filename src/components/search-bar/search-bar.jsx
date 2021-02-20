@@ -5,8 +5,8 @@ import "./search-bar.styles.css";
 
 export const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
-  // const state = useSelector((state) => state);
-  // console.log(state);
+  const state = useSelector((state) => state);
+  console.log(state);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {

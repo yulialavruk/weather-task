@@ -5,8 +5,7 @@ import "./search-bar.styles.css";
 
 export const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
-  const state = useSelector((state) => state);
-  console.log(state);
+  const isLoading = useSelector((state) => state.isLoading);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -29,7 +28,11 @@ export const SearchBar = () => {
           value={searchValue}
           onChange={handleChange}
         />
-        <button className="search-btn" type="submit">
+        <button
+          className="search-btn"
+          type="submit"
+          disabled={isLoading === true}
+        >
           Submit
         </button>
       </div>
